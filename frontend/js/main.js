@@ -1,13 +1,13 @@
 
 const products = [
-    { id: 1, name: "Grapes", category: "fruits", price: 12, img: "/img/fruite-item-5.jpg" },
-    { id: 2, name: "Raspberries", category: "fruits", price: 7, img: "/img/fruite-item-2.jpg" },
-    { id: 3, name: "Banana", category: "fruits", price: 4, img: "/img/fruite-item-3.jpg" },
-    { id: 4, name: "Oranges", category: "fruits", price: 4, img: "/img/fruite-item-1.jpg" },
-    { id: 5, name: "Tomato", category: "vegetables", price: 6, img: "/img/vegetable-item-1.jpg" },
-    { id: 6, name: "Potato", category: "vegetables", price: 3, img: "/img/vegetable-item-5.jpg" },
-    { id: 7, name: "Kinder Bueno", category: "snacks", price: 1.50, img: "/img/kinderbueno.jpg" },
-    { id: 8, name: "Fanta Orange", category: "drinks", price: 1.35, img: "/img/fanta.png" }
+    { id: 1, name: "Grapes", category: "fruits", price: 12, img: "frontend/img/fruite-item-5.jpg" },
+    { id: 2, name: "Raspberries", category: "fruits", price: 7, img: "frontend/img/fruite-item-2.jpg" },
+    { id: 3, name: "Banana", category: "fruits", price: 4, img: "frontend/img/fruite-item-3.jpg" },
+    { id: 4, name: "Oranges", category: "fruits", price: 4, img: "frontend/img/fruite-item-1.jpg" },
+    { id: 5, name: "Tomato", category: "vegetables", price: 6, img: "frontend/img/vegetable-item-1.jpg" },
+    { id: 6, name: "Potato", category: "vegetables", price: 3, img: "frontend/img/vegetable-item-5.jpg" },
+    { id: 7, name: "Kinder Bueno", category: "snacks", price: 1.50, img: "frontend/img/kinderbueno.jpg" },
+    { id: 8, name: "Fanta Orange", category: "drinks", price: 1.35, img: "frontend/img/fanta.png" }
 ];
 
 
