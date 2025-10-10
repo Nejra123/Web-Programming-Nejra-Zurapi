@@ -1,0 +1,40 @@
+<div id="cart-page" class="container-fluid py-5" data-page="cart">
+    <div class="container py-5">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Products</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Total</th>
+                        <th scope="col">Handle</th>
+                    </tr>
+                </thead>
+                <tbody id="cartItems">
+                    </tbody>
+            </table>
+        </div>
+
+        <div class="row g-4 justify-content-end">
+            <div class="col-sm-8 col-md-7 col-lg-6 col-xl-4">
+                <div class="bg-light p-4 rounded mt-5">
+                    <h4 class="mb-4">Cart Totals</h4>
+                 
+                    <div class="py-4 mb-4 border-bottom d-flex justify-content-between">
+                        <h5 class="mb-0 ps-4 me-4">Total</h5>
+                        <p id="total" class="mb-0 pe-4">KM 0.00</p>
+                    </div>
+                    <br><p>Payment on site.</p>
+                    <button class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4" 
+                            type="button" 
+                            onclick="window.location.hash = 'checkout';" 
+                            data-route="checkout">
+                        Proceed Checkout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
