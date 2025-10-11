@@ -1,4 +1,3 @@
 # Web-Programming-Nejra-Zurapi
 
-<img width="972" height="654" alt="image" src="https://github.com/user-attachments/assets/a85c1ef1-87af-4b03-a374-34efebf5af93" />
-
+<img width="982" height="587" alt="image" src="https://github.com/user-attachments/assets/a446497a-ea08-4dcb-b56b-eefca184b84e" />
