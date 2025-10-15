@@ -1,4 +1,104 @@
 
+    function activestatus(viewId) {
+        document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === `#${viewId}`);
+        });
+       
+        document.querySelector('.navbar-brand').classList.toggle('active', viewId === 'home');
+    }
+
+    function showActiveSection(viewId) {
+        document.querySelectorAll('#spapp section').forEach(sec => {
+            sec.classList.toggle('active', sec.id === viewId);
+        });
+    }
+    $(document).ready(function() {
+
+    var app = $.spapp({
+        defaultView: "#home",
+        templateDir: "frontend/views/" 
+    });
+
+  
+    app.route({
+        view: "home",
+        load: "home.html",
+        onReady: function() {
+            activestatus("home");
+            showActiveSection("home");
+          
+            if (typeof renderProducts === 'function') {
+                renderProducts("all"); 
+               
+            }
+        }
+    });
+
+    app.route({
+        view: "shop",
+        load: "shop.html",
+        onReady: function() {
+            activestatus("shop");
+            showActiveSection("shop");
+           
+            if (typeof renderProducts === 'function') {
+                renderProducts("all"); 
+                
+            }
+        }
+    });
+
+    app.route({
+        view: "contact",
+        load: "contact.html",
+        onReady: function() {
+            activestatus("contact");
+            showActiveSection("contact");
+        }
+    });
+
+    app.route({
+        view: "cart",
+        load: "cart.html",
+        onReady: function() {
+            activestatus("cart");
+            showActiveSection("cart");
+            
+            if (typeof renderCart === 'function') {
+                renderCart();
+            }
+        }
+    });
+
+    app.route({
+        view: "profile",
+        load: "profile.html",
+        onReady: function() {
+            activestatus("profile");
+            showActiveSection("profile");
+        }
+    });
+
+       
+
+app.route({
+    view: "register",
+    load: "register.html",
+    onReady: function() {
+      
+        activestatus("register"); 
+        showActiveSection("register"); 
+    }
+});
+
+
+
+    app.run();
+    
+
+    });
+
+
 const products = [
     { id: 1, name: "Grapes", category: "fruits", price: 12, img: "frontend/img/fruite-item-5.jpg" },
     { id: 2, name: "Raspberries", category: "fruits", price: 7, img: "frontend/img/fruite-item-2.jpg" },
