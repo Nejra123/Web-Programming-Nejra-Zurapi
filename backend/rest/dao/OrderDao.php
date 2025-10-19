@@ -20,12 +20,6 @@ public function getByDate($Date) {
         return $stmt->fetchAll();
 }
 
-public function getByCustomer($customer_id) {
-    $stmt=$this->connection->prepare("SELECT * FROM orders WHERE customer_id = :customer_id");
-    $stmt->bindParam(":customer_id",$customer_id);
-    $stmt->execute();
-    return $stmt->fetchAll();
-}
 
 }
 ?>
