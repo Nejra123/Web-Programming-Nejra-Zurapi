@@ -6,10 +6,6 @@ class CategoriesDao extends BaseDAO{
     }
 
     public function getNumOfProductsByName($name){
-        $stmt=$this->connection->prepare("SELECT number_of_products FROM categories WHERE name = :name");
-        $stmt->bindParam(":name",$name);
-        $stmt->execute();
-        return $stmt->fetchAll();
-    }
-}
+        return $this->getByField("name", $name);
+}}
 ?>

@@ -1,5 +1,5 @@
 <?php
-require_once "BaseDAO.php";
+require_once "baseDAO.php";
 
 class ProductsDao extends BaseDAO {
     public function __construct() {
@@ -7,17 +7,13 @@ class ProductsDao extends BaseDAO {
 } 
 
 public function getQuantity($id) {
-    $stmt = $this->connection->prepare("SELECT quantity FROM products WHERE id=:id");
-    $stmt->bindParam(":id", $id);
-    $stmt->execute();
-    return $stmt->fetchAll();
+    $product = $this->getById($id);
+    return $product["quantity"];
 }
 
 public function getPrice($id) {
-    $stmt = $this->connection->prepare("SELECT price FROM products WHERE id=:id");
-    $stmt->bindParam(":id", $id);
-    $stmt->execute();
-    return $stmt->fetchAll();
+    $product = $this->getById($id);
+    return $product["price"];
 }
 
 }
