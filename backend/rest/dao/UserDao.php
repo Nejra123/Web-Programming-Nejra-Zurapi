@@ -7,17 +7,11 @@ class UserDao extends BaseDao {
    }
 
    public function getByEmail($email) {
-       $stmt = $this->connection->prepare("SELECT * FROM users WHERE email = :email");
-       $stmt->bindParam(':email', $email);
-       $stmt->execute();
-       return $stmt->fetch();
+       return $this->getByField("email", $email);
    }
 
    public function changePassword($id, $password) {
-    $stmt = $this->connection->prepare('UPDATE customers SET password=:password WHERE id=:id');
-$stmt->bindParam(':id', $id);
-$stmt->bindParam(':password', $password);
-$stmt->execute();
+    return $this->update($id, ['password' => $password]);
 
 }}
 
