@@ -36,7 +36,7 @@ $product_ordersDao = new Product_OrdersDao();
 
 //print_r($orderDao->getByCustomer(9));
 
-/*$userDao->changePassword(9,"nejraUpdate");*/
+$userDao->changePassword(9,"nejraUpdate123");
 /*$messagesDao->insert([
    "id"=>0,
    "username"=> "mjaumjau",
