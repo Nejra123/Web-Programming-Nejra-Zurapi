@@ -7,9 +7,6 @@ class MessagesDao extends BaseDAO{
         parent::__construct("messages");
     }
     public function getMessagesByUsername($username){
-        $stmt = $this->connection->prepare("SELECT content FROM messages WHERE username= :username");
-        $stmt->bindParam(":username", $username);
-        $stmt->execute();
-       return $stmt->fetchAll();
+       return $this->getByField("username", $username);
 }}
 ?>
