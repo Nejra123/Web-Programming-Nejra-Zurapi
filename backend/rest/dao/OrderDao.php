@@ -7,11 +7,17 @@ class OrderDao extends BaseDao {
    }
 
    public function getByUserId($customer_id) {
-       return $this->getByField("customer_id", $customer_id);
+       $stmt = $this->connection->prepare("SELECT * FROM orders WHERE customer_id = :customer_id");
+       $stmt->bindParam(':customer_id', $customer_id);
+       $stmt->execute();
+       return $stmt->fetchAll();
    }
 
 public function getByDate($Date) {
-             return $this->getByField("Date", $Date);
+        $stmt = $this->connection->prepare("SELECT * FROM orders WHERE Date=:Date" );
+        $stmt->bindParam(":Date",$Date);
+        $stmt->execute();
+        return $stmt->fetchAll();
 }
 
 

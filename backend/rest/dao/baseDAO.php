@@ -57,16 +57,5 @@ public function delete($id){
     return $stmt->execute();
 }
 
-
-
-
-public function getByField($field, $value) {
-    $stmt = $this->connection->prepare("SELECT * FROM " . $this->table . " WHERE $field = :field");
-    $stmt->bindParam(":field", $value);
-    $stmt->execute();
-    return $stmt->fetchAll();
 }
-
-}
-
 ?>
