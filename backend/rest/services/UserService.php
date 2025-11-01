@@ -43,18 +43,24 @@ public function register($data){
 
 public function login($email, $password){
     $user = $this->dao->getByEmail($email);
+   // print_r($user);  
+   // print_r($user[0]["password"]);  
     if(!$user){
         throw new Exception("This email is not registered.");
 }
 else{
-    if(password_verify($password, $user["password"])){
+    if(password_verify($password, $user[0]["password"])){
         unset($user["password"]);
         return $user;
 }
 else {
             
-            throw new Exception("User with this credidentials does not exist.");
+            throw new Exception("User with these credidentials does not exist.");
         }
 }}
+
+public function removeUser( $id ){
+    $this->dao->delete($id);
 }
-?>
+}
+?> 

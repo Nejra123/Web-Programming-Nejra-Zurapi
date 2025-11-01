@@ -15,5 +15,9 @@ public function getPrice($id){
     return $this->dao->getPrice($id);
 }
 
+public function deleteProduct($id){
+    return $this->dao->delete($id);
+}
+
 }
 ?>

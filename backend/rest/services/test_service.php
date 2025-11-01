@@ -5,7 +5,7 @@ require_once "MessageService.php";
 require_once "Product_OrderService.php";
 require_once "ProductService.php";
 require_once "UserService.php";
-
+/*
 $Orderservice = new OrderService();
 $order = $Orderservice->getByUserId(9);
 print_r($order);
@@ -24,7 +24,7 @@ print_r($ProductOrderService->getByOrderId(1));
 
 $ProductService = new ProductService(); 
 print_r($ProductService->getPrice(2));
-
+*/
 $User = new UserService();
 /*$User->changePassword(10, "changesPass");
 print_r($User->getByEmail("nejrazurapi@gmail.com"));
@@ -33,18 +33,19 @@ $User->register(["name"=>"Hana",
  "email"=>"hanahanic@gmail.com", 
  "password"=>"hana123"]);
 */
-print_r($User->login("hanahanic@gmail.com", "hana123"));
-print_r($User->getByEmail("nejrazurapi@gmail.com"));
+print_r($User->login("lejlazurapi@gmail.com", "lejla123"));
+//print_r($User->getByEmail("nejrazurapi@gmail.com"));
 
 
-$message = $MessageService->getMessagesByUsername("Nejra123");
-print_r("Message by username: ");
-print_r( $message);
+//$message = $MessageService->getMessagesByUsername("Nejra123");
+//print_r("Message by username: ");
+//print_r( $message);
 
 
-print_r("GET BY DATE: ");
+//print_r("GET BY DATE: ");
+/*
 print_r($Orderservice->getByDate("2025-10-18"));
 
 print_r("GET BY PRICE: ");
-print_r($ProductService->getPrice(7));
+print_r($ProductService->getPrice(7));*/
 ?>
