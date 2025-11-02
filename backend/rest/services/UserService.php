@@ -50,7 +50,7 @@ public function login($email, $password){
 }
 else{
     if(password_verify($password, $user[0]["password"])){
-        unset($user["password"]);
+        unset($user[0]["password"]);
         return $user;
 }
 else {

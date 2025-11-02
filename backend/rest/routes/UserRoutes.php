@@ -41,8 +41,7 @@ Flight::route('GET /user/@id', function($id){
  * )
  */
 Flight::route("GET /user/email/@email", function ($email) {
-    $decodedEmail = urldecode($email);
-    Flight::json(Flight::userService()->getByEmail($decodedEmail));
+    Flight::json(Flight::userService()->getByEmail($email));
 });
 
 /**

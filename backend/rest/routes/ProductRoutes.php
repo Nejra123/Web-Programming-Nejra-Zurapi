@@ -38,7 +38,7 @@ Flight::route('POST /products', function() {
     }
     
     $result = Flight::productService()->create($data);
-    Flight::json($result, 201);
+    Flight::json($result);
 });
 
 
