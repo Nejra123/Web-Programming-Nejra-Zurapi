@@ -20,7 +20,7 @@ public function changePassword($id, $password){
 public function getPassword ( $id ){
     return $this->dao->getPassword($id);
 }
-
+/*
 public function register($data){
      $email = "test@example.com";
     if(filter_var($data["email"], FILTER_VALIDATE_EMAIL)){
@@ -57,10 +57,11 @@ else {
             
             throw new Exception("User with these credidentials does not exist.");
         }
-}}
+}}*/
 
 public function removeUser( $id ){
     $this->dao->delete($id);
 }
 }
+
 ?> 
