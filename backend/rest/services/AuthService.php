@@ -62,7 +62,22 @@ public function register($data) {
     }
     
     unset($userData[0]['password']);
-    
-    return ['success' => true, 'data' => $userData[0]];
+
+
+           $jwt_payload = [
+           'user' => $userData[0],
+           'iat' => time(),
+           'exp' => time() + (60 * 60 * 24) 
+       ];
+
+       $token = JWT::encode(
+           $jwt_payload,
+           Config::JWT_SECRET(),
+           'HS256'
+       );
+
+
+    return ['success' => true, 'data' => array_merge($userData[0], ['token' => $token])];             
+
 }
 }
