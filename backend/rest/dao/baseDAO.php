@@ -1,40 +1,6 @@
 <?php
 require_once __DIR__ . '/../config.php';
 
-class Database {
-   private static $host = 'localhost';
-   private static $dbName = 'QuartMarketDB';
-   private static $username = 'root';
-   private static $password = '';
-   private static $connection = null;
-
-   public static function connect() {
-       if (self::$connection === null) {
-           try {
-               self::$connection = new PDO(
-                   "mysql:host=" . self::$host . ";dbname=" . self::$dbName,
-                   self::$username,
-                   self::$password,
-                   [
-                       PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                       PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-                   ]
-               );
-           } catch (PDOException $e) {
-              die("Connection failed: " . $e->getMessage());
-           }
-       }
-      
-      
-       return self::$connection;
-
-    
-   }
-
-   
-}
-
-
 class BaseDAO{
     protected $table;
     protected $connection;
@@ -43,7 +9,19 @@ class BaseDAO{
 
     public function __construct($table){
         $this->table = $table;
-        $this->connection = Database::connect();
+        try {
+            $this->connection = new PDO(
+                "mysql:host=" . Config::DB_HOST() . ";dbname=" . Config::DB_NAME() . ";port=" . Config::DB_PORT(),
+                Config::DB_USER(),
+                Config::DB_PASSWORD(),
+                [
+                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+                ]
+            );
+        } catch (PDOException $e) {
+            throw $e;
+        }
 }
 
 public function getAll(){
