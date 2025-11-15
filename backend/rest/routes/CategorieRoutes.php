@@ -4,6 +4,9 @@
  *     path="/categories/",
  *     tags={"categories"},
  *     summary="Get categories",
+ *      security={
+    *         {"ApiKey": {}}
+    *     },
  *    
  *     @OA\Response(
  *         response=200,
@@ -12,6 +15,7 @@
  * )
  */ 
 Flight::route('GET /categories', function() {
+    Flight::auth_middleware()->authorizeRoles([Roles::ADMIN, Roles::USER]);
     Flight::json(Flight::categorieService()->getAll());
 });
 
@@ -20,6 +24,9 @@ Flight::route('GET /categories', function() {
  *     path="/categories/{id}",
  *     tags={"categories"},
  *     summary="Get category by id",
+ *      security={
+    *         {"ApiKey": {}}
+    *     },
  *     @OA\Parameter(
  *         name="id",
  *         in="path",
@@ -34,6 +41,7 @@ Flight::route('GET /categories', function() {
  * )
  */
 Flight::route('GET /categories/@id', function($id) {
+    Flight::auth_middleware()->authorizeRole(Roles::ADMIN); 
     Flight::json(Flight::categorieService()->getById($id));
 });
 
@@ -42,6 +50,9 @@ Flight::route('GET /categories/@id', function($id) {
  *     path="/categories/name/{name}",
  *     tags={"categories"},
  *     summary="Get number of products by category name",
+ *      security={
+    *         {"ApiKey": {}}
+    *     },
  *     @OA\Parameter(
  *         name="name",
  *         in="path",
@@ -56,6 +67,7 @@ Flight::route('GET /categories/@id', function($id) {
  * )
  */
 Flight::route('GET /categories/name/@name', function($name) {
+    Flight::auth_middleware()->authorizeRoles([Roles::ADMIN, Roles::USER]);
     Flight::json(Flight::categorieService()->getNumOfProductsByName($name));
 });
 ?>

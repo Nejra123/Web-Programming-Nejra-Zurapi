@@ -6,6 +6,9 @@ use OpenApi\Annotations as OA;
  * path="/orders",
  * tags={"orders"},
  * summary="Get all orders",
+ *  security={
+    *         {"ApiKey": {}}
+    *     },
  * @OA\Response(
  * response=200,
  * description="Returns a list of all orders",
@@ -13,6 +16,7 @@ use OpenApi\Annotations as OA;
  * )
  */
 Flight::route('GET /orders', function() {
+    Flight::auth_middleware()->authorizeRole(Roles::ADMIN);
     Flight::json(Flight::orderService()->getAll());
 });
 
@@ -21,6 +25,9 @@ Flight::route('GET /orders', function() {
  * path="/orders/{customer_id}",
  * tags={"orders"},
  * summary="Get orders by Customer ID",
+ *  security={
+    *         {"ApiKey": {}}
+    *     },
  * @OA\Parameter(
  * name="customer_id",
  * in="path",
@@ -35,6 +42,7 @@ Flight::route('GET /orders', function() {
  * )
  */
 Flight::route('GET /orders/@customer_id', function($customer_id) {
+    Flight::auth_middleware()->authorizeRole(Roles::ADMIN);
     Flight::json(Flight::orderService()->getByUserId($customer_id));
 });
 
@@ -43,6 +51,9 @@ Flight::route('GET /orders/@customer_id', function($customer_id) {
  * path="/orders/date/{target_date}",
  * tags={"orders"},
  * summary="Get orders by date",
+ *  security={
+    *         {"ApiKey": {}}
+    *     },
  * @OA\Parameter(
  * name="target_date",
  * in="path",
@@ -57,6 +68,7 @@ Flight::route('GET /orders/@customer_id', function($customer_id) {
  * )
  */
 Flight::route('GET /orders/date/@target_date', function($target_date) {
+    Flight::auth_middleware()->authorizeRole(Roles::ADMIN);
     $clean_date = trim($target_date);
     Flight::json(Flight::orderService()->getByDate($clean_date));
 });
@@ -67,6 +79,9 @@ Flight::route('GET /orders/date/@target_date', function($target_date) {
  * path="/orders",
  * tags={"orders"},
  * summary="Create a new order",
+ *  security={
+    *         {"ApiKey": {}}
+    *     },
  * @OA\RequestBody(
  * required=true,
  * description="Order details",
@@ -86,6 +101,7 @@ Flight::route('GET /orders/date/@target_date', function($target_date) {
  * )
  */
 Flight::route('POST /orders', function() {
+    Flight::auth_middleware()->authorizeRoles([Roles::ADMIN, Roles::USER]);
     $data = Flight::request()->data->getData();
     Flight::json(Flight::orderService()->create($data));
 });

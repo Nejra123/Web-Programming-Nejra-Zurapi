@@ -5,6 +5,9 @@
  * path="/user/{id}",
  * tags={"user"},
  * summary="Get user details by ID",
+ *  security={
+    *         {"ApiKey": {}}
+    *     },
  * @OA\Parameter(
  * name="id",
  * in="path",
@@ -19,6 +22,8 @@
  * )
  */
 Flight::route('GET /user/@id', function($id){
+    Flight::auth_middleware()->authorizeRole(Roles::ADMIN);
+
     Flight::json(Flight::userService()->getById($id));
 });
 
@@ -27,6 +32,9 @@ Flight::route('GET /user/@id', function($id){
  * path="/user/email/{email}",
  * tags={"user"},
  * summary="Get user details by email",
+ *  security={
+    *         {"ApiKey": {}}
+    *     },
  * @OA\Parameter(
  * name="email",
  * in="path",
@@ -41,6 +49,7 @@ Flight::route('GET /user/@id', function($id){
  * )
  */
 Flight::route("GET /user/email/@email", function ($email) {
+      Flight::auth_middleware()->authorizeRole(Roles::ADMIN);
     Flight::json(Flight::userService()->getByEmail($email));
 });
 
@@ -49,6 +58,9 @@ Flight::route("GET /user/email/@email", function ($email) {
  * path="/user/{id}",
  * tags={"user"},
  * summary="Change a users password",
+ *  security={
+    *         {"ApiKey": {}}
+    *     },
  * @OA\Parameter(
  * name="id",
  * in="path",
@@ -70,6 +82,7 @@ Flight::route("GET /user/email/@email", function ($email) {
  * )
  */
 Flight::route("PUT /user/@id", function ($id) {
+      Flight::auth_middleware()->authorizeRoles([Roles::ADMIN, Roles::USER]);
     $data = Flight::request()->data; 
     $new_password = $data['password']; 
     
@@ -83,6 +96,9 @@ Flight::route("PUT /user/@id", function ($id) {
  * path="/user/delete/{id}",
  * tags ={"user"},
  * summary = "Deleting the user",
+ *  security={
+    *         {"ApiKey": {}}
+    *     },
  * * @OA\Parameter(
  * name="id",
  * in="path",
@@ -98,7 +114,9 @@ Flight::route("PUT /user/@id", function ($id) {
  * )
  */
 Flight::route("DELETE /user/delete/@id", function ($id)
- { Flight::json(Flight::userService()->removeUser($id)); });
+ { 
+    Flight::auth_middleware()->authorizeRole(Roles::ADMIN);
+    Flight::json(Flight::userService()->removeUser($id)); });
 
 
 ?>

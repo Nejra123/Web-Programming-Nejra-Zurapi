@@ -5,6 +5,9 @@
  * path="/products",
  * tags={"products"},
  * summary="Create a new product",
+ *  security={
+    *         {"ApiKey": {}}
+    *     },
  * @OA\RequestBody(
  * required=true,
  * description="Product details",
@@ -24,6 +27,7 @@
  * )
  */
 Flight::route('POST /products', function() {
+    Flight::auth_middleware()->authorizeRole(Roles::ADMIN);
     
     $data = Flight::request()->data->getData();
     
@@ -41,12 +45,45 @@ Flight::route('POST /products', function() {
     Flight::json($result);
 });
 
+/**
+ * @OA\Get(
+ * path="/products",
+ * tags={"products"},
+ * summary="Get a list of all products",
+ * security={
+ * {"ApiKey": {}}
+ * },
+* @OA\Response(
+ * response=200,
+ * description="A list of all products",
+ * )
+ * )
+ */
+Flight::route('GET /products', function() {
+
+    Flight::auth_middleware()->authorizeRoles([Roles::ADMIN, Roles::USER]);
+    $products = Flight::productService()->getAll();
+    
+
+    $safe_products = array_map(function($product) {
+        if (isset($product['image'])) {
+            unset($product['image']);
+        }
+        return $product;
+    }, $products);
+    
+    Flight::json($safe_products);
+    
+});
 
 /**
  * @OA\Get(
  * path="/products/{id}",
  * tags={"products"},
  * summary="Get product details by ID",
+ *  security={
+    *         {"ApiKey": {}}
+    *     },
  * @OA\Parameter(
  * name="id",
  * in="path",
@@ -62,6 +99,7 @@ Flight::route('POST /products', function() {
  * )
  */
 Flight::route('GET /products/@id', function($id) {
+    Flight::auth_middleware()->authorizeRole(Roles::ADMIN);
     $product = Flight::productService()->getById($id);
     
     // Logic to unset image data before sending response
@@ -77,6 +115,9 @@ Flight::route('GET /products/@id', function($id) {
  * path="/products/quantity/{id}",
  * tags={"products"},
  * summary="Get quantity by product ID",
+ *  security={
+    *         {"ApiKey": {}}
+    *     },
  * @OA\Parameter(
  * name="id",
  * in="path",
@@ -92,6 +133,7 @@ Flight::route('GET /products/@id', function($id) {
  * )
  */
 Flight::route('GET /products/quantity/@id', function($id) {
+    Flight::auth_middleware()->authorizeRole(Roles::ADMIN);
     Flight::json( Flight::productService()->getQuantity($id));
     
 });
@@ -101,6 +143,9 @@ Flight::route('GET /products/quantity/@id', function($id) {
  * path="/products/delete/{id}",
  * tags={"products"},
  * summary="Delete a product by given ID",
+ *  security={
+    *         {"ApiKey": {}}
+    *     },
  * @OA\Parameter(
  * name="id",
  * in="path",
@@ -116,6 +161,7 @@ Flight::route('GET /products/quantity/@id', function($id) {
  */
 
 Flight::route('DELETE /products/delete/@id', function($id) {
+    Flight::auth_middleware()->authorizeRole(Roles::ADMIN);
     Flight::json(Flight::productService()->deleteProduct($id));
 }
 );

@@ -6,6 +6,9 @@
  * path="/message/{username}",
  * tags={"messages"},
  * summary="Retrieve all messages for a specific user.",
+ *  security={
+    *         {"ApiKey": {}}
+    *     },
  * @OA\Parameter(
  * name="username",
  * in="path",
@@ -23,6 +26,7 @@
  * ))
  */
 Flight::route("GET /message/@username", function ($username) {
+    Flight::auth_middleware()->authorizeRole(Roles::ADMIN);
     Flight::json(Flight::messageService()->getMessagesByUsername($username));
 });
 

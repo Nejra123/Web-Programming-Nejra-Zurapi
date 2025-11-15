@@ -6,6 +6,9 @@ use OpenApi\Annotations as OA;
  * path="/product_orders/order/{order_id}",
  * tags={"product orders"},
  * summary="Get product orders by Order ID",
+ *  security={
+    *         {"ApiKey": {}}
+    *     },
  * @OA\Parameter(
  * name="order_id",
  * in="path",
@@ -19,6 +22,7 @@ use OpenApi\Annotations as OA;
  * )
  */
 Flight::route('GET /product_orders/order/@order_id', function($order_id) {
+    Flight::auth_middleware()->authorizeRole(Roles::ADMIN);
     Flight::json(Flight::product_orderService()->getByOrderId($order_id));
 });
 
@@ -27,6 +31,9 @@ Flight::route('GET /product_orders/order/@order_id', function($order_id) {
  * path="/product_orders",
  * tags={"product orders"},
  * summary="Get all product orders (items)",
+ *  security={
+    *         {"ApiKey": {}}
+    *     },
  * @OA\Response(
  * response=200,
  * description="Returns a list of all product order items",
@@ -34,6 +41,7 @@ Flight::route('GET /product_orders/order/@order_id', function($order_id) {
  * )
  */
 Flight::route('GET /product_orders', function() {
+    Flight::auth_middleware()->authorizeRole(Roles::ADMIN);
     Flight::json(Flight::product_orderService()->getAll());
 });
 
@@ -42,6 +50,9 @@ Flight::route('GET /product_orders', function() {
  * path="/product_orders/{id}",
  * tags={"product orders"},
  * summary="Get product order by ID",
+ *  security={
+    *         {"ApiKey": {}}
+    *     },
  * @OA\Parameter(
  * name="id",
  * in="path",
@@ -56,6 +67,7 @@ Flight::route('GET /product_orders', function() {
  * )
  */
 Flight::route('GET /product_orders/@id', function($id) {
+    Flight::auth_middleware()->authorizeRole(Roles::ADMIN);
     Flight::json(Flight::product_orderService()->getById($id));
 });
 ?>

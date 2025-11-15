@@ -8,10 +8,16 @@ require_once __DIR__ .'/rest/services/CategorieService.php';
 require_once __DIR__ .'/rest/services/ProductService.php';
 require_once __DIR__ .'/rest/services/Product_OrderService.php';
 require __DIR__ . '/rest/services/AuthService.php';
+require __DIR__ ."/middleware/AuthMiddleware.php";
+require __DIR__ ."/data/roles.php";
 
 
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 
 
@@ -22,37 +28,33 @@ Flight::register('categorieService', 'CategorieService');
 Flight::register('productService', 'ProductService');
 Flight::register('product_orderService', 'Product_OrderService');
 Flight::register('auth_service', "AuthService");
+Flight::register('auth_middleware', "AuthMiddleware");
 
 Flight::route('GET /', function(){
     echo 'Hello world! FlightPHP is working!';
 });
 
+Flight::before('start', function() {
+    $url = Flight::request()->url;
+    
+    if (
+        strpos($url, '/auth/login') === 0 ||
+        strpos($url, '/auth/register') === 0 
+    ) {
+        return; 
+    } 
 
-Flight::route('/*', function() {
-   if(
-       strpos(Flight::request()->url, '/auth/login') === 0 ||
-       strpos(Flight::request()->url, '/auth/register') === 0
-   ) {
-       return TRUE;
-   } else {
-       try {
-           $token = Flight::request()->getHeader("Authentication");
-           if(!$token)
-               Flight::halt(401, "Missing authentication header");
+    try {
+        $token = Flight::request()->getHeader("Authentication"); 
+        
+        $user_data = Flight::auth_middleware()->verifyToken($token);
+        Flight::set('jwt_token', $token);
+        Flight::set('user', $user_data); //it doesnt want to read the user if this is in verifyToken
 
-           $decoded_token = JWT::decode($token, new Key(Config::JWT_SECRET(), 'HS256'));
-
-           Flight::set('user', $decoded_token->user);
-           Flight::set('jwt_token', $token);
-           return TRUE;
-       } catch (\Exception $e) {
-           Flight::halt(401, $e->getMessage());
-       }
-   }
+    } catch (\Exception $e) {
+        Flight::halt(401, $e->getMessage());
+    }
 });
-
-
-
 require_once __DIR__ .'/rest/routes/UserRoutes.php';
 require_once __DIR__ .'/rest/routes/MessagesRoutes.php';
 require_once __DIR__ .'/rest/routes/OrderRoutes.php';
