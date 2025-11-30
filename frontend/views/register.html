@@ -1,18 +1,44 @@
 <div class="container py-5">
     <div class="row justify-content-center">
         <div class="col-lg-7 mx-auto">
-            <form action="" class="">
-                <br>  <br>  <br>
-                <input type="text" class="w-100 form-control border-0 py-3 mb-4" placeholder="Enter Your Username" name="username" required>
-                 <input type="text" class="w-100 form-control border-0 py-3 mb-4" placeholder="Enter Your Name" name="name" required>
-                  <input type="text" class="w-100 form-control border-0 py-3 mb-4" placeholder="Enter Your Surname" name="surname" required>
-                <input type="email" class="w-100 form-control border-0 py-3 mb-4" placeholder="Enter Your Email" name="email" required>
-                <input type="password" class="w-100 form-control border-0 py-3 mb-4" placeholder="Enter Your Password" name="password" required>
+            <br><br><br>
+            <h2 class="text-center mb-4">Register</h2>
+            <form id="register-form">
+                <div class="mb-3">
+                    <label class="form-label">Username</label>
+                    <input type="text" class="form-control" placeholder="Enter Your Username" name="username" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Name</label>
+                    <input type="text" class="form-control" placeholder="Enter Your Name" name="name" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Surname</label>
+                    <input type="text" class="form-control" placeholder="Enter Your Surname" name="surname" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-control" placeholder="Enter Your Email" name="email" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-control" placeholder="Enter Your Password" name="password" required>
+                </div>
                 
-                <button class="w-100 btn form-control border-secondary py-3 bg-white text-primary" type="submit">Submit</button>
-                <br> <br> 
-                
+                <button class="w-100 btn form-control border-secondary py-3 bg-white text-primary" type="submit">Register</button>
+                <br><br>
+                <div class="d-flex align-items-center justify-content-center">
+                    <p class="me-1 mb-0">Already have an account?</p>
+                    <a href="#profile" class="text-primary">Login</a>
+                </div>
             </form>
         </div>
     </div>
 </div>
+
+<script>
+$(document).ready(function() {
+    console.log("Register page loaded");
+    UserService.initRegister();
+});
+</script>

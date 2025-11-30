@@ -1,5 +1,78 @@
 
 /*** Spinner Start ***/
+#toast-container > div {
+    opacity: 1;
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    border-radius: 8px;
+    padding: 18px 24px;
+    font-size: 15px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+    border: 1px solid #333;
+}
+
+/* Success notifications - Black with white text */
+#toast-container > .toast-success {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+}
+
+/* Error notifications - Black with white text */
+#toast-container > .toast-error {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+}
+
+/* Info notifications - Black with white text */
+#toast-container > .toast-info {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+}
+
+/* Warning notifications - Black with white text */
+#toast-container > .toast-warning {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+}
+
+/* Toast title */
+#toast-container > div .toast-title {
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 5px;
+    color: #ffffff !important;
+}
+
+/* Toast message */
+#toast-container > div .toast-message {
+    font-size: 14px;
+    color: #ffffff !important;
+}
+
+/* Close button - White X */
+#toast-container > div .toast-close-button {
+    color: #ffffff !important;
+    opacity: 0.8;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#toast-container > div .toast-close-button:hover {
+    opacity: 1;
+    color: #ffffff !important;
+}
+
+/* Progress bar - White */
+#toast-container > div .toast-progress {
+    height: 4px;
+    background-color: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* Hover effect */
+#toast-container > div:hover {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+    background-color: #1a1a1a !important;
+}
 #spinner {
     opacity: 0;
     visibility: hidden;
