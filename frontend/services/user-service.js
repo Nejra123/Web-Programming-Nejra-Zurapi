@@ -135,7 +135,7 @@ var UserService = {
         $(".logout-btn").remove();
         $(".admin-panel-link").remove();
         
-        console.log("=== UPDATE NAVIGATION ===");
+      
         console.log("Token exists:", !!token);
         
         if (token) {
@@ -164,12 +164,12 @@ var UserService = {
                 
                 
                 if (user.role && user.role.toUpperCase() === Constants.ADMIN_ROLE.toUpperCase()) {
-                    console.log("✓ User is ADMIN - adding admin panel link");
+                    console.log("User is ADMIN - adding admin panel link");
                     navContainer.append(`
                         <a href="#admin" class="nav-item nav-link admin-panel-link">Admin Panel</a>
                     `);
                 } else {
-                    console.log("✗ User is NOT admin. Role:", user.role);
+                    console.log("User is NOT admin. Role:", user.role);
                 }
                 
                
@@ -182,7 +182,7 @@ var UserService = {
             $('a[href="#profile"]').show();
         }
         
-        console.log("=== END UPDATE NAVIGATION ===");
+       
     },
     
     isLoggedIn: function() {

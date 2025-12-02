@@ -52,7 +52,6 @@ let ProductService = {
     },
     
     deleteProduct: function(id, callback) {
-        console.log("=== DELETE PRODUCT FUNCTION CALLED ===");
         console.log("Product ID:", id);
         console.log("Full URL:", Constants.PROJECT_BASE_URL + "products/" + id);
         
@@ -72,7 +71,6 @@ let ProductService = {
                 }
             },
             success: function(response, textStatus, jqXHR) {
-                console.log("=== DELETE SUCCESS ===");
                 console.log("Status:", jqXHR.status);
                 console.log("Response:", response);
                 console.log("Text Status:", textStatus);
@@ -86,7 +84,6 @@ let ProductService = {
                 }
             },
             error: function(jqXHR, textStatus, errorThrown) {
-                console.log("=== DELETE ERROR ===");
                 console.error("Status:", jqXHR.status);
                 console.error("Status Text:", textStatus);
                 console.error("Error:", errorThrown);
@@ -96,7 +93,6 @@ let ProductService = {
                 toastr.error('Failed to delete product');
             },
             complete: function(jqXHR, textStatus) {
-                console.log("=== DELETE COMPLETE ===");
                 console.log("Status:", textStatus);
                 console.log("Headers:", jqXHR.getAllResponseHeaders());
             }

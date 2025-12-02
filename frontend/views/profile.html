@@ -94,7 +94,7 @@
 
 <script>
 $(document).ready(function() {
-    console.log("=== PROFILE PAGE LOADED ===");
+  
     
     const token = localStorage.getItem("user_token");
     console.log("Token exists:", !!token);
@@ -116,7 +116,7 @@ $(document).ready(function() {
             const userRole = user.role ? user.role.toUpperCase() : '';
             const adminRole = Constants.ADMIN_ROLE.toUpperCase();
             
-            console.log("Comparing roles (uppercase):", userRole, "===", adminRole);
+            console.log("Comparing roles:", userRole, "===", adminRole);
             
             if (userRole === adminRole) {
                 console.log("Showing admin redirect");
@@ -146,6 +146,6 @@ $(document).ready(function() {
         }
     }
     
-    console.log("=== END PROFILE PAGE SETUP ===");
+
 });
 </script>

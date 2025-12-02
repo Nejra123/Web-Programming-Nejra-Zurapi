@@ -8,7 +8,6 @@ let OrderService = {
             return;
         }
         
-        console.log("=== STARTING ORDER CREATION ===");
         console.log("Order data:", orderData);
         console.log("Cart items:", cartItems);
         
@@ -43,12 +42,10 @@ let OrderService = {
             date: date,
             time: time
         };
-        
-        console.log("=== SENDING ORDER TO BACKEND ===");
+
         console.log("Order data:", data);
         
         RestClient.post('orders', data, function(response) {
-            console.log("=== ORDER CREATED SUCCESSFULLY ===");
             console.log("Response:", response);
             
             toastr.success("Order placed successfully!");
@@ -59,7 +56,6 @@ let OrderService = {
             
             if (callback) callback(response);
         }, function(jqXHR) {
-            console.error("=== ORDER CREATION FAILED ===");
             console.error("Status:", jqXHR.status);
             console.error("Response:", jqXHR.responseJSON);
             console.error("Text:", jqXHR.responseText);
