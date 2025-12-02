@@ -26,39 +26,6 @@
 
 <script>
 $(document).ready(function() {
-    
-    const itemsContainer = $('#checkout-items');
-    const totalElement = $('#checkout-total');
-    let total = 0;
-    
-    cart.forEach(item => {
-        const itemTotal = item.product.price * item.quantity;
-        total += itemTotal;
-        itemsContainer.append(`
-            <div class="d-flex justify-content-between mb-2">
-                <span>${item.product.name} x ${item.quantity}</span>
-                <span>KM ${itemTotal.toFixed(2)}</span>
-            </div>
-        `);
-    });
-    
-    totalElement.text(`KM ${total.toFixed(2)}`);
-    
-   
-    $('#checkout-form').on('submit', function(e) {
-        e.preventDefault();
-        
-        if (cart.length === 0) {
-            toastr.error("Your cart is empty");
-            return;
-        }
-        
-        const formData = Object.fromEntries(new FormData(this).entries());
-        
-        OrderService.createOrder(formData, cart, function() {
-            cart = [];
-            window.location.hash = "#home";
-        });
-    });
+    CheckoutService.init();
 });
 </script>

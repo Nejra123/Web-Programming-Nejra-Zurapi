@@ -94,58 +94,6 @@
 
 <script>
 $(document).ready(function() {
-  
-    
-    const token = localStorage.getItem("user_token");
-    console.log("Token exists:", !!token);
-    
-    if (!token) {
-        console.log("No token - showing login form");
-        $('#login-section').show();
-        $('#user-dashboard').hide();
-        $('#admin-redirect').hide();
-        UserService.initLogin();
-    } else {
-        const user = UserService.getCurrentUser();
-        console.log("Current user:", user);
-        console.log("User role:", user?.role);
-        console.log("ADMIN_ROLE constant:", Constants.ADMIN_ROLE);
-        
-        if (user) {
-            const userName = user.name || user.username || user.email || 'User';
-            const userRole = user.role ? user.role.toUpperCase() : '';
-            const adminRole = Constants.ADMIN_ROLE.toUpperCase();
-            
-            console.log("Comparing roles:", userRole, "===", adminRole);
-            
-            if (userRole === adminRole) {
-                console.log("Showing admin redirect");
-                $('#admin-name').text(userName);
-                $('#admin-redirect').show();
-                $('#login-section').hide();
-                $('#user-dashboard').hide();
-                
-                setTimeout(function() {
-                    console.log("Redirecting to admin panel...");
-                    window.location.hash = "#admin";
-                }, 2000);
-            } else {
-                console.log("Showing user dashboard");
-                $('#user-name').text(userName);
-                $('#user-dashboard').show();
-                $('#login-section').hide();
-                $('#admin-redirect').hide();
-            }
-        } else {
-            console.log("Invalid token");
-            localStorage.clear();
-            $('#login-section').show();
-            $('#user-dashboard').hide();
-            $('#admin-redirect').hide();
-            UserService.initLogin();
-        }
-    }
-    
-
+    ProfileService.init();
 });
 </script>
