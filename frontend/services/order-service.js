@@ -8,8 +8,7 @@ let OrderService = {
             if (errorCallback) errorCallback();
             return;
         }
-        
-        console.log("=== STARTING ORDER CREATION ===");
+
         console.log("Order data:", orderData);
         console.log("Cart items:", cartItems);
         
@@ -52,7 +51,7 @@ let OrderService = {
         RestClient.post('orders', data, function(response) {
             console.log("Response:", response);
             
-            // Clear cart
+            //clear cart
             cart = [];
             saveCart();
             

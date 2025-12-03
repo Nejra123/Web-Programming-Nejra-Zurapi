@@ -1,15 +1,12 @@
 let AdminService = {
-    // Modal references
     adminProductModal: null,
     adminDeleteModal: null,
     viewOrderModal: null,
     pendingDeleteId: null,
 
-    // Initialize admin panel
     init: function() {
         console.log("Admin service initialized");
         
-        // Initialize Bootstrap modals
         const addModalElement = document.getElementById('addProductModal');
         const deleteModalElement = document.getElementById('deleteProductModal');
         const viewOrderModalElement = document.getElementById('viewOrderModal');
@@ -18,10 +15,7 @@ let AdminService = {
         this.adminDeleteModal = new bootstrap.Modal(deleteModalElement);
         this.viewOrderModal = new bootstrap.Modal(viewOrderModalElement);
         
-        // Setup event listeners
         this.setupEventListeners();
-        
-        // Load initial data
         this.loadProducts();
         this.loadOrders();
     },
@@ -29,7 +23,6 @@ let AdminService = {
     setupEventListeners: function() {
         const self = this;
         
-        // Delete modal hidden event
         document.getElementById('deleteProductModal').addEventListener('hidden.bs.modal', function () {
             if (self.pendingDeleteId) {
                 const idToDelete = self.pendingDeleteId;
@@ -38,19 +31,16 @@ let AdminService = {
             }
         });
         
-        // Add Product Button
         $('#add-product-btn').on('click', function() {
             self.adminProductModal.show();
         });
         
-        // Add Product Form
         $('#addProductForm').on('submit', function(e) {
             e.preventDefault();
             const formData = Object.fromEntries(new FormData(this).entries());
             self.addProduct(formData);
         });
         
-        // Confirm Delete Button
         $('#confirm-delete-btn').on('click', function() {
             const productId = $('#delete_product_id').val();
             if (!productId) {
@@ -61,7 +51,7 @@ let AdminService = {
             self.adminDeleteModal.hide();
         });
         
-        // Tab change event
+      
         $('button[data-bs-toggle="tab"]').on('shown.bs.tab', function (e) {
             const target = $(e.target).attr('data-bs-target');
             if (target === '#orders') {
@@ -131,7 +121,7 @@ let AdminService = {
                 `);
             });
             
-            // Attach delete button handlers
+           
             $('.delete-product-btn').on('click', function() {
                 const productId = $(this).data('id');
                 const productName = $(this).data('name');
@@ -150,7 +140,7 @@ let AdminService = {
                 return;
             }
             
-            // Sort by ID descending
+          
             orders.sort((a, b) => (b.ID || b.id) - (a.ID || a.id));
             
             orders.forEach(order => {
@@ -178,7 +168,7 @@ let AdminService = {
                 `);
             });
             
-            // Attach view button handlers
+      
             $('.view-order-btn').on('click', function() {
                 const orderId = $(this).data('id');
                 AdminService.viewOrderDetails(orderId);
@@ -202,7 +192,7 @@ let AdminService = {
                 return;
             }
             
-            // Populate order details
+      
             $('#order-detail-id').text(orderId);
             $('#order-detail-customer').text(order.customer_id || 'N/A');
             $('#order-detail-date').text(order.date || order.Date || 'N/A');
@@ -210,7 +200,7 @@ let AdminService = {
             $('#order-detail-amount').text('KM ' + parseFloat(order.amount || 0).toFixed(2));
             $('#order-detail-address').text(order.address || 'N/A');
             
-            // Parse items
+          
             let items = [];
             if (order.items) {
                 try {
