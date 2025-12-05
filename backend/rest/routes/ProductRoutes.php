@@ -27,7 +27,6 @@ Flight::route('POST /products', function() {
     
     $data = Flight::request()->data->getData();
     
-    // Image is now just a path string, no special handling needed
     $result = Flight::productService()->create($data);
     Flight::json(['success' => true, 'data' => $result]);
 });
