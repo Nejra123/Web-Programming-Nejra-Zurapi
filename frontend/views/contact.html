@@ -16,7 +16,6 @@
                 </div>
                 <div class="col-lg-7">
                     <form id="contact-form" class="">
-                    
                         <textarea name="content" class="w-100 form-control border-0 mb-4" rows="5" cols="10" placeholder="Your Message" required></textarea>
                         <button class="w-100 btn form-control border-secondary py-3 bg-white text-primary" type="submit">Submit</button>
                     </form>
@@ -51,20 +50,6 @@
 
 <script>
 $(document).ready(function() {
-    $('#contact-form').on('submit', function(e) {
-        e.preventDefault();
-        
-        if (!UserService.isLoggedIn()) {
-            toastr.error("Please login to send a message");
-            window.location.hash = "#profile";
-            return;
-        }
-        
-        const formData = Object.fromEntries(new FormData(this).entries());
-        
-        MessageService.sendMessage(formData, function() {
-            $('#contact-form')[0].reset();
-        });
-    });
+    ContactService.init();
 });
 </script>
