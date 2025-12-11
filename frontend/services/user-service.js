@@ -43,37 +43,26 @@ var UserService = {
             data: JSON.stringify(entity),
             contentType: "application/json",
             dataType: "json",
-            success: function (result) {
-                console.log("Login response:", result);
-                
-                if (result.success && result.data && result.data.token) {
-                    localStorage.setItem("user_token", result.data.token);
-                    
-                    const decoded = Utils.parseJwt(result.data.token);
-                    console.log("Decoded token after login:", decoded);
-                    
-                    toastr.success("Login successful!");
-                    
-                    setTimeout(function() {
-                        UserService.updateNavigation();
-                        window.location.hash = "#profile";
-                        location.reload();
-                    }, 1000);
-                } else if (result.data && result.data.token) {
-                    localStorage.setItem("user_token", result.data.token);
-                    
-                    const decoded = Utils.parseJwt(result.data.token);
-                    console.log("Decoded token after login:", decoded);
-                    
-                    toastr.success("Login successful!");
-                    
-                    setTimeout(function() {
-                        UserService.updateNavigation();
-                        window.location.hash = "#profile";
-                        location.reload();
-                    }, 1000);
-                } else {
-                    toastr.error(result.error || result.message || 'Login failed');
+           success: function (result) {
+    console.log("Login response:", result);
+    
+    if (result.data && result.data.token) {
+        localStorage.setItem("user_token", result.data.token);
+        
+        const decoded = Utils.parseJwt(result.data.token);
+        console.log("Decoded token after login:", decoded);
+        
+        toastr.success("Login successful!");
+        
+        setTimeout(function() {
+            UserService.updateNavigation();
+            window.location.hash = "#profile";
+            location.reload();
+        }, 1000);
+    } else {
+        toastr.error(result.error || result.message || 'Login failed');
+    
+
                 }
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -147,10 +136,7 @@ var UserService = {
             if (decoded && decoded.user) {
                 user = decoded.user;
                 console.log("User found in decoded.user:", user);
-            } else if (decoded) {
-                user = decoded;
-                console.log("User is the decoded token itself:", user);
-            }
+            } 
             
             if (user) {
                 console.log("User role:", user.role);

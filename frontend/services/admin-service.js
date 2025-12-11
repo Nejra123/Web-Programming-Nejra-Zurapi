@@ -76,7 +76,7 @@ let AdminService = {
 
     executeDelete: function(productId) {
         const self = this;
-        toastr.info("Deleting product...");
+
         
         ProductService.deleteProduct(productId, function(response) {
             if (response && response.success) {
