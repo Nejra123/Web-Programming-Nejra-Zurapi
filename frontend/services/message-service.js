@@ -1,4 +1,4 @@
-let MessageService = {
+/*let MessageService = {
     sendMessage: function(messageData, callback) {
         const user = UserService.getCurrentUser();
         
@@ -40,4 +40,4 @@ let MessageService = {
             toastr.error(errorMsg);
         });
     }
-};
+};*/
