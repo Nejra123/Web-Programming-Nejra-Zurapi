@@ -1,21 +1,99 @@
-<div class="container py-5">
-    <div class="row justify-content-center">
-        <div class="col-lg-7 mx-auto">
-            <form action="" class="">
-                <br>  <br>  <br>
-                 <input type="email" class="w-100 form-control border-0 py-3 mb-4" placeholder="Enter Your Email">
-                <input type="password" class="w-100 form-control border-0 py-3 mb-4" placeholder="Password">
-                <button class="w-100 btn form-control border-secondary py-3 bg-white text-primary" type="submit">Submit</button>
-                <br> <br> 
-                <div class="d-flex align-items-center">
-                <p class="me-1 mb-0">You do not have an account?</p>
-                <span>
-                <a href="#register" class="dropdown-item"  style="color: rgb(148, 17, 17);">Register</a>
-                
-
-                 </span>
+<div class="container py-5" id="profile-container">
+    <br><br><br>
+    
+    <div id="login-section" style="display: none;">
+        <div class="row justify-content-center">
+            <div class="col-lg-7 mx-auto">
+                <h2 class="text-center mb-4">Login</h2>
+                <form id="login-form">
+                    <div class="mb-3">
+                        <label class="form-label">Email address</label>
+                        <input type="email" name="email" class="form-control" required />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Password</label>
+                        <input type="password" name="password" class="form-control" required />
+                    </div>
+                    <button type="submit" class="w-100 btn form-control border-secondary py-3 bg-white text-primary">Login</button>
+                    <br><br>
+                    <div class="d-flex align-items-center justify-content-center">
+                        <p class="me-1 mb-0">You do not have an account?</p>
+                        <a href="#register" class="text-primary">Register</a>
+                    </div>
+                </form>
+            </div>
         </div>
-            </form>
+    </div>
+
+    <div id="user-dashboard" style="display: none;">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 mx-auto text-center">
+                <h1 class="mb-4 text-primary">Welcome, <span id="user-name"></span>!</h1>
+                <p class="lead mb-4">You are logged in as a customer.</p>
+                
+                <div class="row g-4 mt-4">
+                    <div class="col-md-6">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body">
+                                <i class="fa fa-shopping-cart fa-3x text-primary mb-3"></i>
+                                <h5 class="card-title">Shop Products</h5>
+                                <p class="card-text">Browse our selection of fresh products</p>
+                                <a href="#shop" class="btn btn-primary">Go to Shop</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body">
+                                <i class="fa fa-shopping-bag fa-3x text-primary mb-3"></i>
+                                <h5 class="card-title">My Cart</h5>
+                                <p class="card-text">View items in your shopping cart</p>
+                                <a href="#cart" class="btn btn-primary">View Cart</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body">
+                                <i class="fa fa-envelope fa-3x text-primary mb-3"></i>
+                                <h5 class="card-title">Contact Us</h5>
+                                <p class="card-text">Get in touch with our team</p>
+                                <a href="#contact" class="btn btn-primary">Contact</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body">
+                                <i class="fa fa-sign-out-alt fa-3x text-danger mb-3"></i>
+                                <h5 class="card-title">Logout</h5>
+                                <p class="card-text">Sign out of your account</p>
+                                <button onclick="UserService.logout()" class="btn btn-danger">Logout</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="admin-redirect" style="display: none;">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 mx-auto text-center">
+                <h1 class="mb-4 text-primary">Welcome, Admin <span id="admin-name"></span>!</h1>
+                <p class="lead mb-4">Redirecting to admin panel...</p>
+                <div class="spinner-border text-primary mb-3" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <br>
+                <a href="#admin" class="btn btn-primary btn-lg">Go to Admin Panel Now</a>
+            </div>
         </div>
     </div>
 </div>
+
+<script>
+$(document).ready(function() {
+    ProfileService.init();
+});
+</script>

@@ -1,0 +1,31 @@
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <h2 class="mb-4">Checkout</h2>
+            <form id="checkout-form">
+                <div class="mb-3">
+                    <label class="form-label">Delivery Address</label>
+                    <textarea name="address" class="form-control" rows="3" required></textarea>
+                </div>
+                
+                <div class="bg-light p-4 rounded">
+                    <h4>Order Summary</h4>
+                    <div id="checkout-items"></div>
+                    <hr>
+                    <div class="d-flex justify-content-between">
+                        <h5>Total:</h5>
+                        <h5 id="checkout-total">KM 0.00</h5>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary mt-3 w-100">Place Order</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+$(document).ready(function() {
+    CheckoutService.init();
+});
+</script>
