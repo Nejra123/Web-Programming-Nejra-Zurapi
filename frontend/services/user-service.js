@@ -36,7 +36,7 @@ var UserService = {
     
     login: function (entity) {
         console.log("Login attempt:", entity);
-        
+        $.blockUI({ message: '<h3>Processing...</h3>' });
         $.ajax({
             url: Constants.PROJECT_BASE_URL + "auth/login",
             type: "POST",
@@ -55,17 +55,20 @@ var UserService = {
         toastr.success("Login successful!");
         
         setTimeout(function() {
+            $.unblockUI();
             UserService.updateNavigation();
             window.location.hash = "#profile";
             location.reload();
         }, 1000);
     } else {
+        $.unblockUI();
         toastr.error(result.error || result.message || 'Login failed');
     
 
                 }
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
+                $.unblockUI();
                 console.error("Login error:", XMLHttpRequest);
                 const errorMsg = XMLHttpRequest.responseJSON?.error || 
                                XMLHttpRequest.responseJSON?.message || 
@@ -78,7 +81,7 @@ var UserService = {
     
     register: function (entity) {
         console.log("Register attempt:", entity);
-        
+        $.blockUI({ message: '<h3>Processing...</h3>' });
         $.ajax({
             url: Constants.PROJECT_BASE_URL + "auth/register",
             type: "POST",
@@ -86,6 +89,7 @@ var UserService = {
             contentType: "application/json",
             dataType: "json",
             success: function (result) {
+                $.unblockUI();
                 console.log("Registration success:", result);
                 
                 if (result.success || result.message) {
@@ -98,6 +102,7 @@ var UserService = {
                 }
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
+                $.unblockUI();
                 console.error("Registration error:", XMLHttpRequest);
                 const errorMsg = XMLHttpRequest.responseJSON?.error || 
                                XMLHttpRequest.responseJSON?.message || 

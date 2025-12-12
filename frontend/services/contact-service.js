@@ -22,12 +22,20 @@ let MessageService = {
             content: messageData.content,
             customer_id: customerId
         };
-        
+        $.blockUI({ message: '<h3>Sending Message...</h3>' });
 
         RestClient.post('messages', data, function(response) {
+            setTimeout(function() {
+                $.unblockUI();
+                location.reload();
+            }, 1000);
             toastr.success("Message sent successfully!");
             if (callback) callback(response);
         }, function(jqXHR) {
+            setTimeout(function() {
+                $.unblockUI();
+                location.reload();
+            }, 1000);
             console.error("Error sending message:", jqXHR);
             const errorMsg = jqXHR.responseJSON?.error || 
                            jqXHR.responseJSON?.message || 
