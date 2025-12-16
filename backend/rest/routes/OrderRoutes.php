@@ -14,7 +14,6 @@ Flight::route('GET /orders', function() {
     Flight::auth_middleware()->authorizeRole(Roles::ADMIN);
     $orders = Flight::orderService()->getAll();
     
-
     foreach ($orders as &$order) {
         if (isset($order['items']) && is_string($order['items'])) {
             $order['items'] = json_decode($order['items'], true);
@@ -44,7 +43,6 @@ Flight::route('GET /orders/@customer_id', function($customer_id) {
     Flight::auth_middleware()->authorizeRole(Roles::ADMIN);
     $orders = Flight::orderService()->getByUserId($customer_id);
     
-    // Decode items JSON for each order
     foreach ($orders as &$order) {
         if (isset($order['items']) && is_string($order['items'])) {
             $order['items'] = json_decode($order['items'], true);
@@ -75,7 +73,6 @@ Flight::route('GET /orders/date/@target_date', function($target_date) {
     $clean_date = trim($target_date);
     $orders = Flight::orderService()->getByDate($clean_date);
     
-    // Decode items JSON for each order
     foreach ($orders as &$order) {
         if (isset($order['items']) && is_string($order['items'])) {
             $order['items'] = json_decode($order['items'], true);
@@ -98,7 +95,18 @@ Flight::route('GET /orders/date/@target_date', function($target_date) {
  *         required={"address", "amount", "items"},
  *         @OA\Property(property="address", type="string", example="123 Main St, Sarajevo"),
  *         @OA\Property(property="amount", type="number", format="float", example=45.99),
- *         @OA\Property(property="items", type="string", example='[{"product_id":1,"name":"Apple","quantity":2,"price":5.00}]'),
+ *         @OA\Property(
+ *             property="items",
+ *             type="array",
+ *             description="Array of order items",
+ *             @OA\Items(
+ *                 type="object",
+ *                 @OA\Property(property="product_id", type="integer", example=1),
+ *                 @OA\Property(property="name", type="string", example="Apple"),
+ *                 @OA\Property(property="quantity", type="integer", example=2),
+ *                 @OA\Property(property="price", type="number", format="float", example=5.00)
+ *             )
+ *         ),
  *         @OA\Property(property="date", type="string", format="date", example="2025-01-15"),
  *         @OA\Property(property="time", type="string", format="time", example="14:30:00")
  *     )
@@ -115,7 +123,6 @@ Flight::route('POST /orders', function() {
         error_log("=== POST /orders START ===");
         error_log("POST /orders - Received data: " . json_encode($data));
         
-       
         $user = Flight::get('user');
         error_log("POST /orders - User from token: " . json_encode($user));
         
@@ -125,7 +132,6 @@ Flight::route('POST /orders', function() {
             return;
         }
         
-       
         $customerId = $user['ID'] ?? $user['id'] ?? null;
         
         if (!$customerId) {
@@ -134,7 +140,6 @@ Flight::route('POST /orders', function() {
             return;
         }
         
-       
         if (!isset($data['items']) || empty($data['items'])) {
             error_log("POST /orders - ERROR: No items provided");
             Flight::json(['success' => false, 'error' => 'Order must contain items'], 400);
@@ -158,7 +163,6 @@ Flight::route('POST /orders', function() {
         
         if (!$orderId) {
             error_log("POST /orders - ERROR: Could not get order ID from result");
-          //  Flight::json(['success' => false, 'error' => 'Order created but ID not returned'], 500);
             return;
         }
         
