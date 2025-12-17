@@ -30,7 +30,7 @@ class Config
    }
 
    public static function JWT_SECRET() {
-    return Config::get_env("JWT_SECRET", 'your1key2string3');
+    return Config::get_env("DB_HOST", 'your1key2string3');
 
    }
 
