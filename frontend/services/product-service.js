@@ -1,9 +1,9 @@
 let ProductService = {
     getAllProducts: function(callback) {
-        console.log("Fetching products from:", Constants.get_api_base_url() + "products");
+        console.log("Fetching products from:", Constants.PROJECT_BASE_UR + "products");
         
         $.ajax({
-            url: Constants.get_api_base_url() + "products",
+            url: Constants.PROJECT_BASE_UR+ "products",
             type: "GET",
             dataType: "json",
             success: function(data) {
@@ -25,7 +25,7 @@ let ProductService = {
         console.log("Fetching product:", id);
         
         $.ajax({
-            url: Constants.get_api_base_url() + "products/" + id,
+            url: Constants.PROJECT_BASE_UR + "products/" + id,
             type: "GET",
             dataType: "json",
             success: function(data) {
@@ -62,14 +62,14 @@ let ProductService = {
     
     deleteProduct: function(id, callback) {
         console.log("Product ID:", id);
-        console.log("Full URL:", Constants.get_api_base_url() + "products/" + id);
+        console.log("Full URL:", Constants.PROJECT_BASE_UR + "products/" + id);
         
         const token = localStorage.getItem("user_token");
         console.log("Token exists:", !!token);
         $.blockUI({ message: '<h3>Deleting Product...</h3>' });
        
         $.ajax({
-            url: Constants.get_api_base_url() + "products/" + id,
+            url: Constants.PROJECT_BASE_UR + "products/" + id,
             type: "DELETE",
             dataType: "json",
             contentType: "application/json",

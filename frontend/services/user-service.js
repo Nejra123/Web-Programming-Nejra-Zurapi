@@ -38,7 +38,7 @@ var UserService = {
         console.log("Login attempt:", entity);
         $.blockUI({ message: '<h3>Processing...</h3>' });
         $.ajax({
-            url: Constants.get_api_base_url() + "auth/login",
+            url: Constants.PROJECT_BASE_UR + "auth/login",
             type: "POST",
             data: JSON.stringify(entity),
             contentType: "application/json",
@@ -83,7 +83,7 @@ var UserService = {
         console.log("Register attempt:", entity);
         $.blockUI({ message: '<h3>Processing...</h3>' });
         $.ajax({
-            url: Constants.get_api_base_url() + "auth/register",
+            url: Constants.PROJECT_BASE_UR + "auth/register",
             type: "POST",
             data: JSON.stringify(entity),
             contentType: "application/json",

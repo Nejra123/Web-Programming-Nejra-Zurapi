@@ -1,9 +1,9 @@
 let RestClient = {
     get: function (url, callback, error_callback) {
-        console.log("GET Request to:", Constants.get_api_base_url()+ url);
+        console.log("GET Request to:", Constants.PROJECT_BASE_UR+ url);
         
         $.ajax({
-            url: Constants.get_api_base_url() + url,
+            url: Constants.PROJECT_BASE_UR + url,
             type: "GET",
             beforeSend: function (xhr) {
                 const token = localStorage.getItem("user_token");
@@ -28,11 +28,11 @@ let RestClient = {
     },
     
     request: function (url, method, data, callback, error_callback) {
-        console.log(method + " Request to:", Constants.get_api_base_url() + url);
+        console.log(method + " Request to:", Constants.PROJECT_BASE_UR + url);
         console.log("Data:", data);
         
         $.ajax({
-            url: Constants.get_api_base_url() + url,
+            url: Constants.PROJECT_BASE_UR + url,
             type: method,
             data: JSON.stringify(data),
             contentType: "application/json",
