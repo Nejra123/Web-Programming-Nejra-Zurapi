@@ -1,5 +1,5 @@
 <?php
-require_once 'baseDao.php';
+require_once 'baseDAO.php';
 
 class AuthDao extends BaseDao {
    protected $table_name;
