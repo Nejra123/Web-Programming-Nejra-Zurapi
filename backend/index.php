@@ -80,9 +80,7 @@ Flight::before('start', function() {
     if (
         strpos($url, '/auth/login') === 0 ||
         strpos($url, '/auth/register') === 0 ||
-        (strpos($url, '/products') === 0 && Flight::request()->method === 'GET') ||
-        strpos($url, '/docs') === 0 ||
-        strpos($url, '/swagger') === 0
+        (strpos($url, '/products') === 0 && Flight::request()->method === 'GET')
     ) {
         return; 
     } 

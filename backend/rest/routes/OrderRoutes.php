@@ -166,10 +166,9 @@ Flight::route('POST /orders', function() {
             return;
         }
         
-        error_log("POST /orders - Order ID: $orderId");
-        error_log("=== POST /orders SUCCESS ===");
+       
         
-        if (isset($result['items']) && is_string($result['items'])) {
+  /*     if (isset($result['items']) && is_string($result['items'])) {
             $result['items'] = json_decode($result['items'], true);
         }
         
@@ -180,7 +179,7 @@ Flight::route('POST /orders', function() {
             'ID' => $orderId,
             'order_id' => $orderId
         ]);
-        
+        */
     } catch (Exception $e) {
         error_log("POST /orders - EXCEPTION: " . $e->getMessage());
         error_log("POST /orders - Stack trace: " . $e->getTraceAsString());
