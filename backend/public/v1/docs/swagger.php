@@ -6,9 +6,9 @@ define('LOCALSERVER', 'http://localhost/Web-Programming-Nejra-Zurapi/backend/');
 define('PRODSERVER', 'https://seal-app-nyueq.ondigitalocean.app/backend/');
 
 if($_SERVER['SERVER_NAME'] == 'localhost' || $_SERVER['SERVER_NAME'] == '127.0.0.1'){
-    define('BASE_URL', 'http://localhost/Web-Programming-Nejra-Zurapi/backend');
+    define('BASE_URL', 'http://localhost/Web-Programming-Nejra-Zurapi/backend/');
 } else {
-    define('BASE_URL', 'https://seal-app-nyueq.ondigitalocean.app/backend');
+    define('BASE_URL', 'https://seal-app-nyueq.ondigitalocean.app/backend/');
 }
 
 $openapi = \OpenApi\Generator::scan([
