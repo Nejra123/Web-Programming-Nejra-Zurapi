@@ -4,7 +4,7 @@ let Constants = {
             return "http://localhost/Web-Programming-Nejra-Zurapi/backend/";
         }
         else{
-            return "https://seal-app-nyueq.ondigitalocean.app/backend/"
+            return "https://seal-app-nyueq.ondigitalocean.app/"
         }
     },
   //  PROJECT_BASE_URL: "http://localhost/Web-Programming-Nejra-Zurapi/backend/",
