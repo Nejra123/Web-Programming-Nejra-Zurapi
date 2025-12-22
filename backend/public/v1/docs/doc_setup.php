@@ -11,11 +11,7 @@
  *   )
  * ),
  * @OA\Server(
- *     url=LOCALSERVER,
- *     description="API server"
- * ),
- * @OA\Server(
- *     url=PRODSERVER,
+ *     url="https://seal-app-nyueq.ondigitalocean.app/backend",
  *     description="API server"
  * ),
  * @OA\SecurityScheme(

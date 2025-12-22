@@ -47,8 +47,13 @@ let OrderService = {
         
 
         console.log("Order data:", data);
-        
+        $.blockUI({ message: '<h3>Processing Order...</h3>' });
+
         RestClient.post('orders', data, function(response) {
+            setTimeout(function() {
+                $.unblockUI();
+                location.reload();
+            }, 1000);
             console.log("Response:", response);
             
             //clear cart
@@ -57,6 +62,10 @@ let OrderService = {
             
             if (callback) callback(response);
         }, function(jqXHR) {
+            setTimeout(function() {
+                $.unblockUI();
+                location.reload();
+            }, 1000);
             console.error("Status:", jqXHR.status);
             console.error("Response:", jqXHR.responseJSON);
             console.error("Text:", jqXHR.responseText);
